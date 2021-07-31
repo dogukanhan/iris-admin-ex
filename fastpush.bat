@@ -1,3 +1,3 @@
 git add .
-git commit -m "asdasd"
+git commit -m "dev"
 git push origin master
