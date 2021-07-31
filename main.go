@@ -4,6 +4,7 @@ import (
 	"app/controller"
 	"app/environment"
 	"app/service"
+	"os"
 
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
@@ -16,8 +17,17 @@ func main() {
 
 	app.HandleDir("/", iris.Dir("./assets"))
 
+	env := environment.DEV
+
+	if len(os.Args) > 1 && os.Args[1] == "prod"{
+		env = environment.PROD
+		print("Environment is Production")
+	}else{
+		print("Environment is Development")
+	}
+
 	mvc.Configure(app.Party("/"), func(app *mvc.Application) {
-		app.Register(environment.ReadEnv("ENV", environment.DEV),
+		app.Register(env,
 			service.NewDiskSpaceService,
 		)
 		app.Handle(new(controller.HomeController))
