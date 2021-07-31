@@ -29,7 +29,7 @@ func NewDiskSpaceService(env environment.Env) DiskSpaceService {
 
 func (d DiskSpace) GetDiskSpace() (string, error) {
 
-	return utility.RunCommand("df | grep /dev/mapper")
+	return utility.RunCommand("df")
 }
 
 func (d DiskSpaceMock) GetDiskSpace() (string, error) {
