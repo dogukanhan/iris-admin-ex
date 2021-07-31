@@ -4,9 +4,9 @@ import (
 	"os/exec"
 )
 
-func RunCommand(name string, arg ...string) (string, error) {
+func RunCommand(cmd string) (string, error) {
 
-	out, err := exec.Command(name, arg...).Output()
+	out, err := exec.Command("bash","-c",cmd).Output()
 
 	if err != nil {
 		return "", err
