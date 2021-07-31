@@ -17,7 +17,7 @@ func main() {
 	app.HandleDir("/", iris.Dir("./assets"))
 
 	mvc.Configure(app.Party("/"), func(app *mvc.Application) {
-		app.Register(environment.DEV,
+		app.Register(environment.ReadEnv("ENV", environment.DEV),
 			service.NewDiskSpaceService,
 		)
 		app.Handle(new(controller.HomeController))
@@ -25,4 +25,3 @@ func main() {
 
 	app.Listen(":8080", iris.WithLogLevel("debug"))
 }
-
